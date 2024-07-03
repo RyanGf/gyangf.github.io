@@ -194,3 +194,125 @@ app = self.env['wecom.application'].create({
     'agent_id': 1000001,
     'secret': 'your_app_secret',
 })
+```
+### 获取访问令牌
+```python
+app = self.env['wecom.application'].browse(app_id)
+access_token = app.get_access_token()
+```
+### 刷新应用信息
+```python
+app.refresh_app_info()
+```
+
+为您提供 `wecom_application.py` 的开发文档，使用 Markdown 格式：
+
+```markdown
+# WeChat Work Application Module (wecom_application.py)
+
+## 概述
+
+`wecom_application.py` 模块定义了 `WeComApplication` 模型，用于管理企业微信应用的配置和功能。该模型是企业微信集成的核心，处理应用的基本信息、认证和 API 交互。
+
+## 模型：WeComApplication
+
+### 继承
+
+- `models.Model`
+- `wecom.base`
+
+### 字段
+
+| 字段名 | 类型 | 描述 |
+|--------|------|------|
+| name | Char | 应用的完整名称（计算字段） |
+| app_name | Char | 应用名称 |
+| company_id | Many2one | 关联的公司 |
+| type_id | Many2one | 应用类型 |
+| category_ids | Many2many | 应用类别 |
+| agent_id | Integer | 企业微信应用的 AgentId |
+| secret | Char | 应用密钥 |
+| is_active | Boolean | 应用是否激活 |
+| sequence | Integer | 排序序号 |
+| access_token | Char | 访问令牌 |
+| token_expiration_time | Datetime | 令牌过期时间 |
+| webhook_ids | One2many | 关联的 Webhook |
+| setting_ids | One2many | 应用设置 |
+
+### 方法
+
+#### _compute_name
+
+计算应用的完整名称。
+
+#### _check_agent_id
+
+验证 agent_id 是否为正整数。
+
+#### get_access_token
+
+获取或刷新访问令牌。
+
+- 返回：访问令牌字符串
+
+#### refresh_app_info
+
+从企业微信服务器刷新应用信息。
+
+#### cron_refresh_tokens
+
+定时任务，用于刷新所有应用的访问令牌。
+
+#### action_view_webhooks
+
+返回查看应用关联 Webhook 的动作。
+
+## 使用示例
+
+### 创建新应用
+
+```python
+app = self.env['wecom.application'].create({
+    'app_name': 'My WeChat Work App',
+    'company_id': company.id,
+    'type_id': app_type.id,
+    'agent_id': 1000001,
+    'secret': 'your_app_secret',
+})
+```
+
+### 获取访问令牌
+
+```python
+app = self.env['wecom.application'].browse(app_id)
+access_token = app.get_access_token()
+```
+
+### 刷新应用信息
+
+```python
+app.refresh_app_info()
+```
+
+## 最佳实践
+
+1. 使用 `get_access_token` 方法获取最新的访问令牌，避免直接访问 `access_token` 字段。
+2. 定期调用 `refresh_app_info` 方法以保持应用信息的最新状态。
+3. 使用 `cron_refresh_tokens` 方法设置自动刷新令牌的定时任务。
+4. 在处理敏感信息（如 `secret`）时，确保采取适当的安全措施。
+
+## 注意事项
+
+- 确保 `agent_id` 在创建或更新应用时是唯一的。
+- `secret` 字段存储敏感信息，应采取适当的安全措施（如加密存储）。
+- 访问令牌的刷新逻辑应考虑企业微信 API 的速率限制。
+
+## 未来增强
+
+- 实现更复杂的令牌管理机制，如令牌池。
+- 添加更多与企业微信 API 交互的方法，如发送消息、管理通讯录等。
+- 实现应用配置的版本控制和历史记录。
+- 增加与其他 Odoo 模块的集成，如 HR 或 CRM。
+
+这个文档提供了 `wecom_application.py` 模块的综合概述，包括其主要组件、字段、方法、使用示例以及最佳实践。您可以根据实际实现和需求进一步扩展或修改这个文档。如果模块有任何更新或新功能，请确保及时更新文档以保持其准确性。
+
