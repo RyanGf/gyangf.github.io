@@ -1,5 +1,5 @@
 # Site settings
-title: Hux Blog
+title: Fred Blog
 SEOTitle: 高飞的博客 | Fred Blog
 header-img: img/home-bg.jpg
 email: 279493842@qq.com
@@ -13,11 +13,11 @@ future: true
 
 # SNS settings
 RSS: false
-weibo_username: huxpro
-zhihu_username: huxpro
-github_username: huxpro
-twitter_username: huxpro
-#facebook_username:  huxpro
+weibo_username: fred
+zhihu_username: fred
+github_username: fred
+twitter_username: fred
+#facebook_username:  fred
 #linkedin_username:  firstname-lastname-idxxxx
 
 # Build settings
@@ -75,7 +75,7 @@ ga_domain: huangxuan.me
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
 sidebar-about-description: "要做一个有 swag 的程序员 <br> React Team @ Meta"
-sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: https://github.com/fred.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
 featured-tags: true # whether or not using Feature-Tags
