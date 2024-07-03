@@ -207,7 +207,7 @@ app.refresh_app_info()
 
 为您提供 `wecom_application.py` 的开发文档，使用 Markdown 格式：
 
-```markdown
+
 # WeChat Work Application Module (wecom_application.py)
 
 ## 概述
